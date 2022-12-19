@@ -6,4 +6,7 @@ class Greeting {
     fun greet(): String {
         return "Hello, ${platform.name}!"
     }
+    fun add(firstNumber:String,secondNumber:String):String{
+        return (firstNumber.toDouble()+secondNumber.toDouble()).toString()
+    }
 }

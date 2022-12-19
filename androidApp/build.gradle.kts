@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.js.translate.expression.InlineMetadata.Companion.compose
+import java.lang.module.ModuleFinder.compose
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -44,8 +47,12 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.3.1")
     implementation("androidx.compose.material:material:1.3.1")
     implementation("androidx.activity:activity-compose:1.6.1")
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.0")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:1.1.5")
 
+    implementation ("androidx.compose.material:material:1.3.1")
+    implementation ("androidx.compose.ui:ui-tooling-preview:1.3.2")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation ("androidx.compose.material:material-icons-extended:1.3.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
     implementation("com.google.dagger:hilt-android:2.42")
