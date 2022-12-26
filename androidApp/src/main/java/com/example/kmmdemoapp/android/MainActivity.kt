@@ -1,6 +1,5 @@
 package com.example.kmmdemoapp.android
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -9,13 +8,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.kmmdemoapp.Greeting
+import com.example.kmmdemoapp.Calculate
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    GreetingView()
+                    TwoTextView()
                 }
             }
         }
@@ -34,7 +32,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun GreetingView() {
+fun TwoTextView() {
     var input1 by remember { mutableStateOf("") }
     var input2 by remember { mutableStateOf("") }
 
@@ -54,7 +52,6 @@ fun GreetingView() {
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal)
         )
 
-
         Spacer(modifier = Modifier.padding(top = 20.dp))
 
         OutlinedTextField(
@@ -67,14 +64,8 @@ fun GreetingView() {
         )
         Spacer(modifier = Modifier.padding(top = 30.dp))
 
-        DropDownOption()
+         DropDownOption(input1, input2)
 
-        Spacer(modifier = Modifier.padding(top = 20.dp))
-
-
-        Text(
-            text = "Answer= " + Greeting().add(input1, input2),
-            modifier = Modifier.padding(top=220.dp, start = 75.dp))
     }
 
 }
@@ -82,8 +73,11 @@ fun GreetingView() {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DropDownOption() {
+fun DropDownOption(input1: String, input2: String) {
 
+    var answer by remember {
+        mutableStateOf("")
+    }
     val contextForToast = LocalContext.current.applicationContext
 
     val listItems = arrayOf("Add", "Subtract", "Multiply", "Divide")
@@ -127,7 +121,12 @@ fun DropDownOption() {
                 // menu item
                 DropdownMenuItem(onClick = {
                     selectedItem = selectedOption
-                    Toast.makeText(contextForToast, "$selectedOption is selected", Toast.LENGTH_SHORT).show()
+                    answer = Calculate().selectedOption(selectedItem, input1, input2)
+                    Toast.makeText(
+                        contextForToast,
+                        "$selectedOption is selected",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     expanded = false
                 }) {
                     Text(text = selectedOption)
@@ -135,9 +134,12 @@ fun DropDownOption() {
             }
         }
     }
+
+    Text(
+        text = "Answer= $answer",
+        modifier = Modifier.padding(top = 220.dp, start = 75.dp)
+    )
 }
-
-
 
 
 @Preview

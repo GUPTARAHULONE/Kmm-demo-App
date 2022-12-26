@@ -1,9 +1,9 @@
 package com.example.kmmdemoapp
 
-class Greeting {
+class Calculate {
     private val platform: Platform = getPlatform()
 
-    fun add(firstNumber: String, secondNumber: String): String {
+    private fun add(firstNumber: String, secondNumber: String): String {
         return if (firstNumber.isEmpty() && secondNumber.isEmpty())
             "0.0"
         else if (firstNumber.isEmpty())
@@ -14,7 +14,7 @@ class Greeting {
             (firstNumber.toDouble() + secondNumber.toDouble()).toString()
     }
 
-    fun subtract(firstNumber: String, secondNumber: String): String {
+    private fun subtract(firstNumber: String, secondNumber: String): String {
         return if (firstNumber.isEmpty() && secondNumber.isEmpty())
             "0.0"
         else if (firstNumber.isEmpty())
@@ -25,7 +25,7 @@ class Greeting {
             (firstNumber.toDouble() - secondNumber.toDouble()).toString()
     }
 
-    fun multiply(firstNumber: String, secondNumber: String): String {
+    private fun multiply(firstNumber: String, secondNumber: String): String {
         return if (firstNumber.isEmpty() && secondNumber.isEmpty())
             "0.0"
         else if (firstNumber.isEmpty())
@@ -33,10 +33,10 @@ class Greeting {
         else if (secondNumber.isEmpty())
             firstNumber
         else
-            (firstNumber.toDouble()*secondNumber.toDouble()).toString()
+            (firstNumber.toDouble() * secondNumber.toDouble()).toString()
     }
 
-    fun divide(firstNumber: String, secondNumber: String): String {
+    private fun divide(firstNumber: String, secondNumber: String): String {
         return if (firstNumber.isEmpty() && secondNumber.isEmpty())
             "0.0"
         else if (firstNumber.isEmpty())
@@ -44,6 +44,16 @@ class Greeting {
         else if (secondNumber.isEmpty())
             firstNumber
         else
-            (firstNumber.toDouble()/secondNumber.toDouble()).toString()
+            (firstNumber.toDouble() / secondNumber.toDouble()).toString()
+    }
+
+    fun selectedOption(chosenOption: String, input1: String, input2: String): String {
+        return when (chosenOption) {
+            "Add" -> add(input1, input2)
+            "Subtract" -> subtract(input1, input2)
+            "Multiply" -> multiply(input1, input2)
+            "Divide" -> divide(input1, input2)
+            else -> ""
+        }
     }
 }
